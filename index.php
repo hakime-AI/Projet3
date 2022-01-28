@@ -1,3 +1,6 @@
+<?php
+require "init.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,50 +9,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/main.css" rel="stylesheet">
-    <?php
-    
-        $servname = 'localhost';
-        $dbname = 'gites';
-        $user = 'root';
-        $pass = '';
-    
-        try {
-            $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
-            $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo "Erreur lors de la connection : " . $e->getMessage();
-        }
-        session_start()
-        ?>
-
     <title>⌂ Accueil ⌂</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body>
-
-    <div class="nav">
-        <img src="assets/logo2.png" alt="logo co.gites" id="logo">
-        <a href="add.php"> <button type="button" class="btn btn-success btn-lg">Proposer un hébergement</button></a><br>
-        <a href="admin_gites.php"> <button type="button" class="btn btn-success btn-lg">Mes
-                hébergements</button></a><br>
-    </div>
-    <div class="bando">
-        <h1>Je recherche un gite</h1>
-        <span>
-            <h3>Nombre de personnes</h3>
-            <input type="number">
-            <h3>Dates</h3><br>
-            <h4>du</h4><input type="date">
-            <h4>au</h4><input type="date">
-        </span>
-    </div>
-
-
-
-
-
-
+    <?php
+    $query = $codb->query("SELECT * FROM `mes_gites` ");
+    $mes_gites = $query->fetchall();
+    $modifier="";
+        
+        if(isset($_POST['modifier'])){
+            $modifier=$_POST['modifier'];
+        }
+    for ($i = 0; $i < count($mes_gites); $i++) {
+        echo "<div class='gite'>";
+        // echo "<div>'<img src='../assets/img/' alt=''>'</div>";
+        echo "<div>",$mes_gites[$i]->id,"</div>";
+        echo "<div>",$mes_gites[$i]->Nom_gite,"</div>";
+        echo "<div>",$mes_gites[$i]->Descript_gite,"</div>";
+        echo "<div>",$mes_gites[$i]->Nbre_couchage,"</div>";
+        echo "<div>",$mes_gites[$i]->Nbre_sdb,"</div>";
+        echo "<div>",$mes_gites[$i]->Emplacement_geo,"</div>";
+        echo "</div>";
+    }
+    ?>
 </body>
+<img src="" alt="">
 
 </html>
 

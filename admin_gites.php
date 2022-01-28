@@ -1,7 +1,17 @@
 <?php
 require "init.php";
 
+if(isset($_FILES['file'])){                            // Boucle permettant de reconnaître la valeur $_FILES
 
+    $tmpName = $_FILES['file']['tmp_name'];
+    $name = $_FILES['file']['name'];
+    $size = $_FILES['file']['size'];
+    $error = $_FILES['file']['error'];
+    $type = $_FILES['file']['type'];
+    
+    move_uploaded_file($tmpName, './assets/img/'.$name);
+    echo "<pre>",print_r($_FILES['file']),"</pre>";
+}
 
 if(isset($_POST['modifdb'])){
     echo "post id fonctionne";
@@ -16,6 +26,25 @@ if(isset($_POST['modifdb'])){
     $result= $codb->prepare($sql);
     $result->execute([$_POST['Nom_gite'], $_POST['Descript_gite'], $_POST['Nbre_couchage'], $_POST['Nbre_sdb'],$_POST['Emplacement_geo'],$_POST['Prix'],$_POST['modifdb']]);
     
+    // $sql = "SELECT photos FROM images_gites WHERE id_gite= :id_gite";
+    // $query = $codb->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    // $query->execute(array(':id_gite' => $_POST['supprimer']));
+    // $image = $query ->fetchall();
+
+    // unlink('assets\img\\'.$image[0]->photos);
+
+    // $result = $codb->prepare("INSERT INTO images_gites(
+    //     photos,
+    //     id_gite	
+    //     )
+    //     VALUES (
+    //     :photos,
+    //     :id_gite	
+    //     )"
+    //     );
+    // $result->bindParam(':photos',$_FILES['file']['name']);
+    // $result->bindParam(':id_gite',$lastId[0]->id);
+    // $result->execute(); 
 }
 
 if(isset($_POST['ajouter'])){
@@ -46,7 +75,7 @@ if(isset($_POST['ajouter'])){
         
         $sql = "SELECT id FROM mes_gites ORDER BY id DESC LIMIT 1";
         $query= $codb->query($sql);
-        $_SESSION['lastId'] = $query ->fetchall();
+        $lastId = $query ->fetchall();
         // echo "<pre>",print_r($_SESSION['lastId'][0]->id),"</pre>";
         
         $result = $codb->prepare("INSERT INTO images_gites(
@@ -59,10 +88,18 @@ if(isset($_POST['ajouter'])){
             )"
             );
         $result->bindParam(':photos',$_FILES['file']['name']);
-        $result->bindParam(':id_gite',$_SESSION['lastId'][0]->id);
+        $result->bindParam(':id_gite',$lastId[0]->id);
         $result->execute(); 
 }
 if(isset($_POST['supprimer'])){
+    $sql = "SELECT photos FROM images_gites WHERE id_gite= :id_gite";
+    $query = $codb->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $query->execute(array(':id_gite' => $_POST['supprimer']));
+    $image = $query ->fetchall();
+    echo "<pre>",print_r($image[0]->photos),"</pre>";
+
+    unlink('assets\img\\'.$image[0]->photos);
+    
     $sql1 = 'DELETE FROM mes_gites WHERE id= :id';
     $result1 = $codb->prepare($sql1);
     $result1->bindParam(':id', $_POST['supprimer'], PDO::PARAM_INT);
@@ -72,18 +109,12 @@ if(isset($_POST['supprimer'])){
     $result2 = $codb->prepare($sql2);
     $result2->bindParam(':id_gite', $_POST['supprimer'], PDO::PARAM_INT);
     $result2->execute();
-}
 
-if(isset($_FILES['file'])){                            // Boucle permettant de reconnaître la valeur $_FILES
-
-    $tmpName = $_FILES['file']['tmp_name'];
-    $name = $_FILES['file']['name'];
-    $size = $_FILES['file']['size'];
-    $error = $_FILES['file']['error'];
-    $type = $_FILES['file']['type'];
     
-    move_uploaded_file($tmpName, './assets/'.$name);
+    
 }
+
+
 
 unset($_POST['supprimer']);
 unset($_POST['modifdb']);
@@ -107,10 +138,14 @@ unset($_POST['ajouter']);
         <button>validé</button> -->
 
     <?php
-        $query = $codb->query("SELECT * FROM `mes_gites` ");
-        $mes_gites = $query ->fetchall();
-        $query = $codb->query("SELECT * FROM `images_gites` ");
-        $images_gites = $query ->fetchall();
+    $sql = "SELECT * FROM `mes_gites` ";
+    $query= $codb->query($sql);
+    $mes_gites = $query ->fetchall();
+    
+    $sql = "SELECT * FROM `images_gites` ";
+    $query= $codb->query($sql);
+    $images_gites = $query ->fetchall();
+    
         echo "<pre>",print_r($images_gites),"</pre>";
         $modifier="";
         
@@ -152,7 +187,7 @@ unset($_POST['ajouter']);
                 echo "<td><input type='text' name='Nbre_sdb'  value=",$mes_gites[$i]->Nbre_sdb," /></td>";
                 echo "<td><input type='text' name='Emplacement_geo'  value=",$mes_gites[$i]->Emplacement_geo," /></td>";
                 echo "<td><input type='text' name='Prix'  value=",$mes_gites[$i]->Prix," /></td>";
-                // echo "<td><input type='text' name='Prix'  value=",$images_gites[$mes_gites[$i]->id]->photos," /></td>";
+                // echo "<td><input type='file' name='file'  value=",$images_gites[$mes_gites[$i]->id]->photos," /></td>";
                 echo "<td><button name='modifdb' value=",$mes_gites[$i]->id,">valider</button></td>";
                 echo "</tr>";
                 // unset($_POST['modifier']);

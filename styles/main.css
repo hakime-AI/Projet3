@@ -1,93 +1,107 @@
-
-body{
-    background-image: url('../assets/cogites.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    
+body {
+  background-image: url("../assets/img/cogites.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-#logo{
-    display: inline-block;
-    width: 8%;
-    height: 8%;
-    border-radius: 50%;
+#logo {
+  display: inline-block;
+  width: 8%;
+  height: 8%;
+  border-radius: 50%;
 }
-.nav{
-    position: relative;
-    right: inherit;
+.nav {
+  position: relative;
+  right: inherit;
 }
-.container{
-    display: inline-block;
+.container {
+  display: inline-block;
 }
-.bando{
-background-color: rgb(248, 248, 248,0.6);
+.bando {
+  background-color: rgb(248, 248, 248, 0.6);
 }
-span{
-    display: block;
+span {
+  display: block;
 }
-h1{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: center;
+h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  text-align: center;
 }
-h2, h3, h4{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+h2,
+h3,
+h4 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .btn {
-    background-color:#FCDEDE;
-    box-shadow:1px 1px 1px #D83F3D inset;
-    
+  background-color: #fcdede;
+  box-shadow: 1px 1px 1px #d83f3d inset;
 }
 
 form {
-    background-color:#fafafa8a;
-    padding:10px;
-    width:280px;
-    margin-left: auto;
-    margin-right: auto;
-    }
+  background-color: #fafafa8a;
+  padding: 10px;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
 fieldset {
-    padding:0 20px 20px 20px;
-    margin-bottom:10px;
-    border:1px solid #DF3F3F;
-    }
+  padding: 0 20px 20px 20px;
+  margin-bottom: 10px;
+  border: 1px solid #df3f3f;
+}
 legend {
-    color:#DF3F3F;
-    font-weight:bold
-    }
+  color: #df3f3f;
+  font-weight: bold;
+}
 label {
-    margin-top:10px;
-    display:block;
-    }
+  margin-top: 10px;
+  display: block;
+}
 label.inline {
-    display:inline;
-    margin-right:50px;
-    }
-input, textarea, select, option {
-    background-color:#FFF3F3;
-    }
-input, textarea, select {
-    padding:3px;
-    border:1px solid #F5C5C5;
-    border-radius:5px;
-    width:200px;
-    box-shadow:1px 1px 2px #C0C0C0 inset;
-    }
+  display: inline;
+  margin-right: 50px;
+}
+input,
+textarea,
+select,
+option {
+  background-color: #fff3f3;
+}
+input,
+textarea,
 select {
-    margin-top:10px;
-    }
-input[type=radio] {
-    background-color:transparent;
-    border:none;
-    width:10px;
-    }
-    input[type=submit]:hover, input[type=reset]:hover {
-        background-color:#FCDEDE;
-        }
-    input,[type=submit]:active, input[type=reset]:active {
-        background-color:#FCDEDE;
-        box-shadow:1px 1px 1px #D83F3D inset;
-    }
-    .tableau{
-        width: auto;
-        height: auto;
-    }
+  padding: 3px;
+  border: 1px solid #f5c5c5;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: 1px 1px 2px #c0c0c0 inset;
+}
+select {
+  margin-top: 10px;
+}
+input[type="radio"] {
+  background-color: transparent;
+  border: none;
+  width: 10px;
+}
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color: #fcdede;
+}
+input,
+[type="submit"]:active,
+input[type="reset"]:active {
+  background-color: #fcdede;
+  box-shadow: 1px 1px 1px #d83f3d inset;
+}
+.tableau {
+  width: auto;
+  height: auto;
+}
+
+/* ----------------------- */
+.gite {
+  display: flex;
+}
