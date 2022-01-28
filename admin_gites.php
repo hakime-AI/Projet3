@@ -25,6 +25,7 @@ if(isset($_POST['modifdb'])){
     WHERE id=?";
     $result= $codb->prepare($sql);
     $result->execute([$_POST['Nom_gite'], $_POST['Descript_gite'], $_POST['Nbre_couchage'], $_POST['Nbre_sdb'],$_POST['Emplacement_geo'],$_POST['Prix'],$_POST['modifdb']]);
+<<<<<<< HEAD
     
     // $sql = "SELECT photos FROM images_gites WHERE id_gite= :id_gite";
     // $query = $codb->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -45,6 +46,9 @@ if(isset($_POST['modifdb'])){
     // $result->bindParam(':photos',$_FILES['file']['name']);
     // $result->bindParam(':id_gite',$lastId[0]->id);
     // $result->execute(); 
+=======
+
+>>>>>>> aec26e41d4b2b7751b7402954c4fcc0d1fc8585b
 }
 
 if(isset($_POST['ajouter'])){
@@ -77,7 +81,7 @@ if(isset($_POST['ajouter'])){
         $query= $codb->query($sql);
         $lastId = $query ->fetchall();
         // echo "<pre>",print_r($_SESSION['lastId'][0]->id),"</pre>";
-        
+
         $result = $codb->prepare("INSERT INTO images_gites(
             photos,
             id_gite	
@@ -104,14 +108,26 @@ if(isset($_POST['supprimer'])){
     $result1 = $codb->prepare($sql1);
     $result1->bindParam(':id', $_POST['supprimer'], PDO::PARAM_INT);
     $result1->execute();
-    
+
     $sql2 = 'DELETE FROM images_gites WHERE id_gite= :id_gite';
     $result2 = $codb->prepare($sql2);
     $result2->bindParam(':id_gite', $_POST['supprimer'], PDO::PARAM_INT);
     $result2->execute();
 
+<<<<<<< HEAD
     
     
+=======
+if(isset($_FILES['file'])){                            // Boucle permettant de reconnaître la valeur $_FILES
+
+    $tmpName = $_FILES['file']['tmp_name'];
+    $name = $_FILES['file']['name'];
+    $size = $_FILES['file']['size'];
+    $error = $_FILES['file']['error'];
+    $type = $_FILES['file']['type'];
+
+    move_uploaded_file($tmpName, './assets/'.$name);
+>>>>>>> aec26e41d4b2b7751b7402954c4fcc0d1fc8585b
 }
 
 
@@ -148,7 +164,7 @@ unset($_POST['ajouter']);
     
         echo "<pre>",print_r($images_gites),"</pre>";
         $modifier="";
-        
+
         if(isset($_POST['modifier'])){
             $modifier=$_POST['modifier'];
         }
@@ -207,9 +223,9 @@ unset($_POST['ajouter']);
         echo "</tr>";
         echo "</table>";
         echo  "</form>";
-        
-        
-        
+
+
+
         ?>
     <!-- </form> -->
     <script>
