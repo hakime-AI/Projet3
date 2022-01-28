@@ -15,7 +15,7 @@ if(isset($_POST['modifdb'])){
     WHERE id=?";
     $result= $codb->prepare($sql);
     $result->execute([$_POST['Nom_gite'], $_POST['Descript_gite'], $_POST['Nbre_couchage'], $_POST['Nbre_sdb'],$_POST['Emplacement_geo'],$_POST['Prix'],$_POST['modifdb']]);
-    
+
 }
 
 if(isset($_POST['ajouter'])){
@@ -48,7 +48,7 @@ if(isset($_POST['ajouter'])){
         $query= $codb->query($sql);
         $_SESSION['lastId'] = $query ->fetchall();
         // echo "<pre>",print_r($_SESSION['lastId'][0]->id),"</pre>";
-        
+
         $result = $codb->prepare("INSERT INTO images_gites(
             photos,
             id_gite	
@@ -67,7 +67,7 @@ if(isset($_POST['supprimer'])){
     $result1 = $codb->prepare($sql1);
     $result1->bindParam(':id', $_POST['supprimer'], PDO::PARAM_INT);
     $result1->execute();
-    
+
     $sql2 = 'DELETE FROM images_gites WHERE id_gite= :id_gite';
     $result2 = $codb->prepare($sql2);
     $result2->bindParam(':id_gite', $_POST['supprimer'], PDO::PARAM_INT);
@@ -81,7 +81,7 @@ if(isset($_FILES['file'])){                            // Boucle permettant de r
     $size = $_FILES['file']['size'];
     $error = $_FILES['file']['error'];
     $type = $_FILES['file']['type'];
-    
+
     move_uploaded_file($tmpName, './assets/'.$name);
 }
 
@@ -113,7 +113,7 @@ unset($_POST['ajouter']);
         $images_gites = $query ->fetchall();
         echo "<pre>",print_r($images_gites),"</pre>";
         $modifier="";
-        
+
         if(isset($_POST['modifier'])){
             $modifier=$_POST['modifier'];
         }
@@ -172,9 +172,9 @@ unset($_POST['ajouter']);
         echo "</tr>";
         echo "</table>";
         echo  "</form>";
-        
-        
-        
+
+
+
         ?>
     <!-- </form> -->
     <script>

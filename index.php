@@ -55,7 +55,7 @@
 
 <?php
 
-
+require <gites class="sql"></gites>
 require 'classes/utilisateur.class.php';
 new Utilisateur();
 /*
@@ -102,6 +102,6 @@ echo '<div class="echo"> Table "Mes gîtes" bien créée 🏡🏡🏡 </div>';
 }
 catch(PDOException $e){
 echo ' Erreur lors de la création de la table "Mes gîtes" ' . $e->getMessage();
-}*/
-
+}
+*/
 ?>

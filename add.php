@@ -148,4 +148,5 @@ $sth->execute();
 }    catch (PDOException $e) {
         echo "Erreur lors de l'envois des données du gîte : " . $e->getMessage();
     }
+
 ?>
