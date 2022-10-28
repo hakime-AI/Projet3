@@ -41,7 +41,7 @@ require "init.php";
 
 <?php
 
-require <gites class="sql"></gites>
+
 require 'classes/utilisateur.class.php';
 new Utilisateur();
 /*
